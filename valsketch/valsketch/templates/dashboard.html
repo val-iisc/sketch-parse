@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+  {% block content %}
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h2> User Information </h1>
+                <h3> Email </h3>
+                {{ current_user.email }}
+                <h3> Username </h3>
+                {{ current_user.username }}
+                <h3> Task Status </h3>
+                You have annotated <b>{{ current_user.annotations.count() }}</b> of <b>{{ current_user.annotation_limit }}</b> sketches.
+
+                {% if current_user.annotations.count() >= current_user.annotation_limit %}
+                <h3 class="bg-danger">Hey. You have exceeded your annotation quota. Please create another account
+                    with a different username and password to continue. (Psst: we recommend appending a number to your previous
+                    account details)
+                </h3>
+                {% endif %}
+
+            </div>
+        </div>
+    </div> <!-- /container -->
+  {% endblock content %}

@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style type="text/css" media="all">
+  {% for part_name in sketch_meta['parts'] %}
+  #add-{{ part_name }}:hover, #remove-{{ part_name }}:hover {
+    background-color: {{ colors[loop.index0] }};
+  }
+  {% endfor %}
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="row">
+          <div id="control-list" class="col-sm-12">
+            <h3>Tools</h3>
+            <div class="btn-group-vertical" role="group">
+              <button type="button" class="btn btn-md btn-default" id="draw-button" disabled="disabled">
+                <span class="fa fa-pencil" aria-hidden="true"></span> Draw
+              </button>
+              <button type="button" class="btn btn-md btn-default" id="delete-button" disabled="disabled">
+                <span class="fa fa-trash-o" aria-hidden="true"></span> Delete
+              </button>
+              <button type="button" class="btn btn-md btn-default" id="complete-button" disabled="disabled">
+                <span class="fa fa-dot-circle-o" aria-hidden="true"></span> Complete
+              </button>
+              <button type="button" class="btn btn-md btn-default" id="undo-button" disabled="disabled">
+                <span class="fa fa-undo" aria-hidden="true"></span> Undo
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+        <div id="part-list" class="col-sm-12">
+          <h3>Parts of {{ sketch_meta['category'] }}</h3>
+            {% for part_name in sketch_meta['parts'] %}
+            <div class="row part-container" id="{{ part_name}}-container">
+                <div id="{{ part_name }}-status"
+                    class="part-status col-sm-2">0</div>
+                <div class="part-name col-sm-6">
+                  <div class="color-indicator" style="background-color: {{ colors[loop.index0] }}; border: 1px solid {{ colors[loop.index0] }}"></div>
+                  {{ part_name }}
+                </div>
+                <div class="part-add col-sm-2" id="add-{{ part_name }}">+</div>
+                <div class="part-remove col-sm-2" id="remove-{{ part_name }}">-</div>
+                <span class="part-color" id="{{ colors[loop.index0] }}"></span>
+            </div>
+            {% endfor %}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <form action="{{ url_for('views.tool') }}" id="form-done" method="POST">
+            <button class="btn btn-lg btn-success btn-block" type="submit">Done</button>
+            <input type="hidden" value="{{ sketch_file }}" name="sketch_file" />
+            <input type="hidden" value="{{ sketch_meta['category'] }}" name="sketch_category" />
+          </form>
+        </div>
+      </div>
+        </div>
+        
+        <div class="col-sm-8 col-sm-offset-1">
+          <canvas id="myCanvas" width="800" height="800" style="border: solid 2px black">
+        </canvas>
+        </div>
+
+  </div>
+
+    <div style="display: none">
+    {{ sketch_meta['svg'] }}
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+    <script src="{{ url_for('static', filename='js/paper-full.js') }}"></script>
+    <script type="text/javascript" charset="utf-8">
+    /* install paper */
+     paper.install(window); 
+    </script>
+    <script src="{{ url_for('static', filename='js/tool.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/draw.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/data_submit.js') }}"></script>
+{% endblock %}

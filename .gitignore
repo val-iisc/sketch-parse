@@ -99,3 +99,10 @@ ENV/
 
 # mypy
 .mypy_cache/
+bootstrap*
+
+*.pyc
+valsketch/valsketch/static/sketches_svg
+valsketch/valsketch/static/sketches_svg_backup
+valsketch/valsketch/static/svg
+valsketch/valsketch/test

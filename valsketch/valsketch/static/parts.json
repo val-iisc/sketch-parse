@@ -1,0 +1,14 @@
+{
+"cow" : [ "ear", "eye", "mouth", "head", "body", "leg", "tail", "horns", "hoof", "udder"],
+"horse" : [ "ear", "eye", "mouth", "head", "body", "leg", "tail", "hoof"],
+"cat" : [ "ear", "eye", "mouth", "head", "body", "leg", "tail"],
+"dog" : [ "ear", "eye", "mouth", "head", "body", "leg", "tail"],
+"sheep" :  ["ear", "eye", "mouth", "head", "body", "leg", "tail"],
+"bus" : ["body", "mirror", "window", "wheel", "head-light_tail-light", "door"],
+"car" :  ["body", "mirror", "window", "wheel", "head-light_tail-light", "door"],
+"bicycle" :  ["wheel","seat","handlebar","body","chain"],
+"motorbike" : ["wheel","seat","handlebar","body","headlight"],
+"airplane" : ["body", "wheel", "tail", "engine", "wings","window"],
+"bird" : ["body", "tail", "head", "leg", "wing"]
+}
+

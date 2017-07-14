@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+
+  {% block content %}
+    <div class="container">
+
+    <form action="{{ url_for('views.signup') }}" class="form-signin" method="POST">
+            <div style="display: none">
+            {{ form.csrf_token }}
+            </div>
+            <h2 class="form-signin-heading">Please sign up</h2>
+
+            <div class="form-group {% if form.username.errors %} has-error {% endif %}">
+            {{ form.username.label(class="sr-only") }}
+            {{form.username(placeholder="Username", class="form-control")}}
+            <p class="help-block">
+            {{ form.username.errors[0] }}
+            
+            </div>
+
+            <div class="form-group {% if form.password.errors %} has-error {% endif %}">
+            {{ form.password.label(class="sr-only") }}
+            {{ form.password(placeholder="Enter Password", class="form-control") }}
+            <p class="help-block">
+            {{ form.password.errors[0] }}
+            </div>
+            <div class="form-group {% if form.confirm.errors %} has-error {% endif %}">
+            {{ form.confirm.label(class="sr-only") }}
+            {{ form.confirm(placeholder="Reenter password", class="form-control") }}
+            <p class="help-block">
+            {{ form.confirm.errors[0] }}
+            </div>
+
+            <div class="form-group {% if form.email.errors %} has-error {% endif %}">
+            {{ form.email.label(class="sr-only")  }}
+            {{ form.email(placeholder="Enter email address", class="form-control") }} 
+            <p class="help-block">
+            {{ form.email.errors[0] }} 
+            </div>
+
+            {{ form.recaptcha }}
+            <div class="form-group {% if form.accept_tos.errors %} has-error {% endif %}">
+            <label class="checkbox">
+            {{form.accept_tos}} 
+            {{form.accept_tos.label}}
+            </label>
+            <p class="help-block">
+            {{ form.accept_tos.errors[0] }}
+            
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+    </form>
+
+
+    </div> <!-- /container -->
+  {% endblock content %}
+
+

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+
+      {% block content %}
+
+    <div class="container">
+    <form action="{{ url_for('views.signin') }}" class="form-signin" method="POST">
+            <div style="display: none">
+            {{ form.csrf_token }}
+            </div>
+            <h2 class="form-signin-heading">Please Sign In</h2>
+
+            <div class="form-group {% if form.email.errors %} has-error {% endif %}">
+            {{ form.email.label(class="sr-only")  }}
+            {{ form.email(placeholder="Enter email address", class="form-control") }} 
+            <p class="help-block">
+            {{ form.email.errors[0] }} 
+            </div>
+
+            <div class="form-group {% if form.password.errors %} has-error {% endif %}">
+            {{ form.password.label(class="sr-only") }}
+            {{ form.password(placeholder="Enter Password", class="form-control") }}
+            <p class="help-block">
+            {{ form.password.errors[0] }}
+            </div>
+
+
+            {{ form.recaptcha }}
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
+    </form>
+
+    </div> <!-- /container -->
+  {% endblock content %}

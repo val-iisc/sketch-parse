@@ -1,0 +1,41 @@
+body {
+  min-height: 2000px;
+  padding-top: 70px;
+}
+
+.part-container {
+    margin: 1em 0;
+    border: 3px solid #000;
+    border-radius: 4px;
+}
+
+.part-status, .part-name, .part-add, .part-remove {
+    cursor: pointer;
+    font-family: Roboto;
+    font-weight: 700;
+    font-size: large;
+}
+
+.part-add, .part-remove {
+    text-align: center;
+}
+
+
+.color-indicator {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    vertical-align: -3.6px;
+}
+
+#form-done {
+    margin-top: 20px;
+}
+
+
+.form-signin {
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+}
