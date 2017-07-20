@@ -23,9 +23,9 @@ Options:
     -h, --help                  Print this message
     --segnetLoss                Weigh each class differently
     --snapPrefix=<str>          Snapshot [default: NoFile]
-    --GTpath=<str>              Ground truth path prefix [default: /data1/ravikiran/SketchObjPartSegmentation/data/Training_GT/chosen-all/merge/]
-    --IMpath=<str>              Sketch images path prefix [default: /data1/ravikiran/SketchObjPartSegmentation/data/Training_Images/chosen-all/merge/]
-    --LISTpath=<str>            Input image number list file [default: /data1/ravikiran/SketchObjPartSegmentation/data/lists/train_val_lists/]
+    --GTpath=<str>              Ground truth path prefix [default: data/gt/]
+    --IMpath=<str>              Sketch images path prefix [default: data/im/]
+    --LISTpath=<str>            Input image number list file [default: data/lists/]
     --lr=<float>                Learning Rate [default: 0.0005]
     --lambda1=<float>           Inter loss weight factor for pose task [default: 0]
     -b, --batchSize=<int>       num sample per batch [default: 1]
@@ -70,7 +70,7 @@ mirrorMap[8] = 7
 
 # Load pose labels
 HCpose = {}
-with open('sketch_pose/Pose_all_label.txt', 'r') as f:
+with open('data/lists/Pose_all_label.txt', 'r') as f:
     for line in f:
         line = line.strip()
         imId, pose= line.split(' ')
@@ -286,7 +286,8 @@ def get_50x_lr_params_double(model_double):
             yield i
 
 
-
+if not os.path.exists('data/snapshots'):
+    os.makedirs('data/snapshots')
 
 #############
 model_double = getattr(deeplab_resnet_sketchParse_r5,'Res_Deeplab')()
@@ -386,6 +387,6 @@ for iter in range(maxIter+1):
 	optimizer_double.zero_grad()
     
     if iter%1000==0 and iter!=0:
-        snapPath = os.path.join('snapshots', snapPrefix + str(iter) + '.pth')
+        snapPath = os.path.join('data/snapshots', snapPrefix + str(iter) + '.pth')
         torch.save(model_double.state_dict(),snapPath)
 

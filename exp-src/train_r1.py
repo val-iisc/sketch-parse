@@ -22,9 +22,9 @@ Options:
     -h, --help                  Print this message
     --segnetLoss                Weigh each class differently
     --snapPrefix=<str>          Snapshot [default: NoFile]
-    --GTpath=<str>              Ground truth path prefix [default: /data1/ravikiran/SketchObjPartSegmentation/data/Training_GT/chosen-all/merge/]
-    --IMpath=<str>              Sketch images path prefix [default: /data1/ravikiran/SketchObjPartSegmentation/data/Training_Images/chosen-all/merge/]
-    --LISTpath=<str>            Input image number list file [default: /data1/ravikiran/SketchObjPartSegmentation/data/lists/train_val_lists/train_cow_horse.txt]
+    --GTpath=<str>              Ground truth path prefix [default: data/gt/]
+    --IMpath=<str>              Sketch images path prefix [default: data/im/]
+    --LISTpath=<str>            Input image number list file [default: data/lists/train_cow_horse.txt]
     --noParts=<int>             Number of parts in the supercategory [default: 5]
     --lr=<float>                Learning Rate [default: 0.0005]
     --lambda1=<float>           Inter loss weight factor for pose task [default: 0]
@@ -105,7 +105,7 @@ mirrorMap[8] = 7
 
 # Load pose labels
 HCpose = {}
-with open('sketch_pose/Pose_all_label.txt', 'r') as f:
+with open('data/lists/Pose_all_label.txt', 'r') as f:
     for line in f:
         line = line.strip()
         imId, pose= line.split(' ')
@@ -214,7 +214,8 @@ def get_10x_lr_params(model):
         for i in b[j]:
             yield i
 
-
+if not os.path.exists('data/snapshots'):
+    os.makedirs('data/snapshots')
 model = getattr(deeplab_resnet_sketchParse_r1,'Res_Deeplab')()
 
 saved_state_dict = torch.load('MS_DeepLab_resnet_pretained_VOC.pth')
@@ -282,7 +283,7 @@ for iter in range(maxIter+1):
 
     if iter % 1000 == 0 and iter !=0:
         print 'taking snapshot ...'
-        snapPath = 'snapshots/DeepLab_RN_auxPose_' + snapPrefix +str(iter)+'.pth'
+        snapPath = 'data/snapshots/DeepLab_RN_auxPose_' + snapPrefix +str(iter)+'.pth'
         torch.save(model.state_dict(), snapPath)
 
 subP.call(['python eval_r1.py', '--snapPrefix', 'DeepLab_RN_auxPose_' + snapPrefix ])
