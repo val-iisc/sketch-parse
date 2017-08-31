@@ -1,6 +1,6 @@
 # sketch-parse
 
-### This repository contains code and for our paper titled "SketchParse: Towards Rich Descriptions For Poorly Drawn Sketches Using Multi-Task Deep Networks"
+### This repository contains code and for our paper titled "[SketchParse: Towards Rich Descriptions For Poorly Drawn Sketches Using Multi-Task Deep Networks](https://drive.google.com/file/d/0BxhUwxvLPO7TeHlrVGYzUFE5VFU/view?usp=sharing)"
 
 # Contents
 * For code and corresponding instructions, navigate to [exp-src](https://github.com/val-iisc/sketch-parse/tree/master/exp-src)
