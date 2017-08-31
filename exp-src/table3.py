@@ -63,7 +63,7 @@ torch.cuda.set_device(gpu0)
 #caffe.set_mode_gpu()
 #caffe.set_device(gpu0)
 #net = caffe.Net('data/train_d1_contour1by2.prototxt', 'data/train_d1_contour1by2_iter_20000.caffemodel',caffe.TEST)
-sketch_root = '/data1/ravikiran/SketchObjPartSegmentation/data/temp_annotation_processor/SVG/PNG_untouched/'
+sketch_root = 'data/sketch-dataset/PNG_untouched/'
 model_A = getattr(resnet_dilated_frozen_r5_D,'Res_Deeplab')() #TODO
 model_B = getattr(resnet_dilated_frozen_r5_D,'Res_Deeplab')() #TODO
 model_C = getattr(resnet_dilated_frozen_r5_D_pose,'Res_Deeplab')() #TODO
@@ -145,7 +145,7 @@ for iter in range(1):
 	class_split = class_selector.split('-')
 	class_ = class_split[0]
  	selector = int(class_split[1])
-        gt_path = '/data1/ravikiran/SketchObjPartSegmentation/data/temp_annotation_processor/test_GT/'+class_
+        gt_path = 'data/sketch-dataset/test_GT/'+class_
         img_list = next(os.walk(gt_path))[2] 
         path = sketch_root + class_
         for i in img_list:
