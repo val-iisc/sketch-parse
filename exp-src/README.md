@@ -39,7 +39,7 @@ python train_r1.py -h
 ```
 
 
-* Run `table1.py`, `table3.py` to evaluate the downloaded  `.pth` files.
+* Run `table1.py`, `table3.py` to evaluate the downloaded  `.pth` files and get results corresponding to table 1 and table 3 in the paper.
 
-Place the downloaded files in the folder `data/snapshots` and then run `table1.py` and `table3.py`.
-The .pth files can be downloaded from [here]().
+Place the downloaded files in the folder `data/snapshots` and place the downloaded annotated sketches in then run `table1.py` and `table3.py`.
+The .pth files can be downloaded from [here](http://val.serc.iisc.ernet.in/star_snapshots/).
