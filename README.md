@@ -11,6 +11,6 @@ For annotated sketch dataset, navigate to dataset. Pose dataset is present in `e
 
 
 
-If you use this work, please cite the paper:
+#### If you use this work, please cite the paper:
 
 SketchParse: Towards Rich Descriptions For Poorly Drawn Sketches Using Multi-Task Deep Networks
