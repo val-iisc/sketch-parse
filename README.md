@@ -13,6 +13,6 @@
 
 #### If you use this work, please cite the paper:
 
-SketchParse: Towards Rich Descriptions For Poorly Drawn Sketches Using Multi-Task Deep Networks, 
+[SketchParse: Towards Rich Descriptions For Poorly Drawn Sketches Using Multi-Task Deep Networks](https://drive.google.com/file/d/0BxhUwxvLPO7TeHlrVGYzUFE5VFU/view?usp=sharing), 
 
 accepted as Full Research Paper with poster presentation in ACM Multimedia 2017.
