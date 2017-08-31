@@ -1,6 +1,6 @@
 Instructions regarding `Pose_all_label.txt`:
 
-* what does _1 and _2 mean?
+* what does _1 and _2 mean( Ans : they are suffix in the original file name, flip augmentations)?
 
 * what does each one of the label mean? probably add the diagram which vivke showed in the presentation, he also sent it to us attached in one of the emails.
 
