@@ -24,8 +24,8 @@ Options:
     -h, --help                  Print this message
     --visualize                 view outputs of each sketch
     --snapPrefix=<str>          Snapshot [default: NoFile]
-    --testGTpath=<str>              Ground truth path prefix [default: /data1/ravikiran/SketchObjPartSegmentation/data/temp_annotation_processor/test_GT/]
-    --testIMpath=<str>              Sketch images path prefix [default: /data1/ravikiran/SketchObjPartSegmentation/data/temp_annotation_processor/SVG/PNG_untouched/]
+    --testGTpath=<str>              Ground truth path prefix [default: data/sketch-dataset/test_GT/]
+    --testIMpath=<str>              Sketch images path prefix [default: data/sketch-dataset/PNG_untouched/]
     --gpu0=<int>                GPU number [default: 0]
 """
 
