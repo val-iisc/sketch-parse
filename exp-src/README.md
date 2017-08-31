@@ -43,3 +43,5 @@ python train_r1.py -h
 
 Place the downloaded files in the folder `data/snapshots` and place the downloaded annotated sketches in then run `table1.py` and `table3.py`.
 The .pth files can be downloaded from [here](http://val.serc.iisc.ernet.in/star_snapshots/).
+
+`pred_gt.txt` contains the predicted label and the real label of each sketch image. The predicted label can also be found real time using a trained classifier. The architecture of the classifier is mentioned in the supplementary material and the training policy / data is mentioned in the paper. This file is used during evaluation.
