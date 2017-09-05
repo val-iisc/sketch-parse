@@ -7,6 +7,8 @@
 
 * For annotation software tool and corresponding instructions, navigate to [valsketch](https://github.com/val-iisc/sketch-parse/tree/master/valsketch)
 
+* For retrieval code, models and a demo, navigate to [retrieval-doc](https://github.com/val-iisc/sketch-parse/tree/master/retrieval-doc)
+
 * For instructions to get annotated sketch dataset, navigate to [exp-src/data/sketch-dataset](https://github.com/val-iisc/sketch-parse/tree/master/exp-src/data/sketch-dataset). Pose dataset is present in [`exp-src/data/lists/Pose_all_label.txt`](https://github.com/val-iisc/sketch-parse/blob/master/exp-src/data/lists/Pose_all_label.txt). Find instruction regarding pose dataset [here](https://github.com/val-iisc/sketch-parse/tree/master/exp-src/data/lists).
 
 
