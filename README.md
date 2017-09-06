@@ -1,6 +1,6 @@
 # sketch-parse
 
-### This repository contains code and additional material for our paper titled "[SketchParse: Towards Rich Descriptions For Poorly Drawn Sketches Using Multi-Task Deep Networks](https://drive.google.com/file/d/0BxhUwxvLPO7TeHlrVGYzUFE5VFU/view?usp=sharing)"
+### This repository contains code and additional material for our paper titled "[SketchParse: Towards Rich Descriptions For Poorly Drawn Sketches Using Multi-Task Deep Networks](https://arxiv.org/pdf/1709.01295)"
 
 # Contents
 * For code and corresponding instructions, navigate to [exp-src](https://github.com/val-iisc/sketch-parse/tree/master/exp-src)
@@ -15,6 +15,6 @@
 
 #### If you use this work, please cite the paper:
 
-[SketchParse: Towards Rich Descriptions For Poorly Drawn Sketches Using Multi-Task Deep Networks](https://drive.google.com/file/d/0BxhUwxvLPO7TeHlrVGYzUFE5VFU/view?usp=sharing), 
+[SketchParse: Towards Rich Descriptions For Poorly Drawn Sketches Using Multi-Task Deep Networks](https://arxiv.org/pdf/1709.01295), 
 
 accepted as Full Research Paper with poster presentation in ACM Multimedia 2017.
