@@ -2,7 +2,20 @@
 
 ### This repository contains code and additional material for our paper titled "[SketchParse: Towards Rich Descriptions For Poorly Drawn Sketches Using Multi-Task Deep Networks](https://arxiv.org/pdf/1709.01295)"
 
+Use it to associate semantics with your freehand sketches!
+
+![Results](./SketchLab-sketches-qualitative-results-ACMMM.svg)
+
+The four panels are chosen from the 100th, 75th, 50th, 25th percentile accuracy of segmentation (by IoU) respectively. As you can see, even in (relatively) bad cases, we can provide fairly accurate segmentations!
+
+# Model
+
+We have a multi-task deep neural network that can segment freehand sketches as well as predict a global pose:
+
+![Results](./model.svg)
+
 # Contents
+
 * For code and corresponding instructions, navigate to [exp-src](https://github.com/val-iisc/sketch-parse/tree/master/exp-src)
 
 * For annotation software tool and corresponding instructions, navigate to [valsketch](https://github.com/val-iisc/sketch-parse/tree/master/valsketch)
@@ -11,7 +24,9 @@
 
 * For instructions to get annotated sketch dataset, navigate to [exp-src/data/sketch-dataset](https://github.com/val-iisc/sketch-parse/tree/master/exp-src/data/sketch-dataset). Pose dataset is present in [`exp-src/data/lists/Pose_all_label.txt`](https://github.com/val-iisc/sketch-parse/blob/master/exp-src/data/lists/Pose_all_label.txt). Find instruction regarding pose dataset [here](https://github.com/val-iisc/sketch-parse/tree/master/exp-src/data/lists).
 
+# Requirements
 
+This code was developed and tested on an Ubuntu 14.04 machine with pyTorch (v0.1.12). We used an NVIDIA TITAN X for training and evaluating our model.
 
 #### If you use this work, please cite the paper:
 
