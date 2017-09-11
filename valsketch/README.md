@@ -1,13 +1,13 @@
 
-
+# VAL Sketch Annotation Tool
 
 ## Instructions
 
 ### Setup the database
 
 We use the sqlite database system which basically stores the database in a single file (and doesn't follow the client-server model).
-The data is stored in `valsketch/testing.db` which must be created by the user. Then, to create the relevant tables within the
-file:
+The data is stored in `valsketch/testing.db` which must be created by the user. If the file already exists, then execute `touch valsketch/testing.db` to overwrite with a new file. 
+Then, to create the relevant tables within the file:
 
 ```
 python manager.py createdb
@@ -39,3 +39,19 @@ sketches of that particular object.
 
 All sketches must be stored in suitably named directories in `valsketch/static/sketches_svg` directory. The annotator tool only works with `.svg` files so make
 sure that sketches are of this format.
+
+## Usage
+
+To get started, use the command `python manager.py runserver`
+
+To see the annotator in action, watch this video [https://youtu.be/PYfA-FYgqDs](https://youtu.be/PYfA-FYgqDs)
+
+
+A few notes:
+  - Complete a full path to annotate an object part
+  - Object parts are inserted in FIFO manner. This means that if you wish to remove
+  an already annotated wheel, then clicking on `-` button next to the part name `wheel`
+  will remove the latest annotated wheel. Thus, you'll have to cycle back if you wish
+  to remove annotation for an earlier `wheel`.
+  - The annotation ink sticks to sketch lines to make it easier for annotators.
+  - Press `Done` when you're done annotating a sketch.
