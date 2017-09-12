@@ -1,6 +1,6 @@
 # sketch-parse
 
-### This repository contains code and additional material for our paper titled "[SketchParse: Towards Rich Descriptions For Poorly Drawn Sketches Using Multi-Task Deep Networks](https://arxiv.org/pdf/1709.01295)"
+### This repository contains code and additional material for our paper titled "[SketchParse: Towards Rich Descriptions For Poorly Drawn Sketches Using Multi-Task Deep Networks](https://arxiv.org/pdf/1709.01295)", ACM Multimedia (ACMMM) 2017.
 
 Use it to associate semantics with your freehand sketches!
 
@@ -30,6 +30,14 @@ This code was developed and tested on an Ubuntu 14.04 machine with pyTorch (v0.1
 
 #### If you use this work, please cite the paper:
 
-[SketchParse: Towards Rich Descriptions For Poorly Drawn Sketches Using Multi-Task Deep Networks](https://arxiv.org/pdf/1709.01295), 
+[SketchParse: Towards Rich Descriptions For Poorly Drawn Sketches Using Multi-Task Deep Networks](https://arxiv.org/pdf/1709.01295) 
 
-accepted as Full Research Paper with poster presentation in ACM Multimedia 2017.
+#### Questions ?
+
+* For questions regarding the main segmentation network, please contact Isht (isht.dwivedi@gmail.com)
+
+* For questions regarding the annotation tool, please contact Sahil (sahil.manocha1995@gmail.com)
+
+* For questions regarding the pose subnetwork and the sketch-based image retrieval application, please contact Abhijat (abhijatbiswas@gmail.com)
+
+* For any other questions, please contact Ravi (ravika@gmail.com)
