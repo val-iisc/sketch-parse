@@ -2,7 +2,7 @@
 
 ### This repository contains code and additional material for our paper titled "[SketchParse: Towards Rich Descriptions For Poorly Drawn Sketches Using Multi-Task Deep Networks](https://arxiv.org/pdf/1709.01295)", ACM Multimedia (ACMMM) 2017.
 
-Use it to associate semantics with your freehand sketches!
+This is a neural network for (semantic) sketch segmentation. Use it to associate semantics with your freehand sketches!
 
 ![Results](./SketchLab-sketches-qualitative-results-ACMMM.svg)
 
