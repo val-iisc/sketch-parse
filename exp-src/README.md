@@ -1,6 +1,7 @@
 This folder contains code to replicate results corresponding to `B, BC, BCP` in Table 1 and `B-R5, BC-R5, BCP-R5` in Table 3 in the paper. 
 
 ### Instructions for use
+* We fine tune our CNN using [this model(download this before running train script)](https://1drv.ms/u/s!AvBNaER10ndvhb1Dfh8jsRmilv718w). [Deeplab v2 authors](https://arxiv.org/abs/1606.00915) released a pretrained version of their net on MSCOCO. We converted it to a pytorch .pth file and use it to fine train our model. Please download this file and place it in the same folder as the train script.
 
 * Use `train_r5.py` to train model for results `B-R5, BC-R5, BCP-R5` in Table 3.
 
