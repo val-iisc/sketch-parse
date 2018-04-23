@@ -3,8 +3,6 @@ from scipy import ndimage
 import cv2
 import numpy as np
 import sys
-sys.path.insert(0,'/data1/ravikiran/SketchObjPartSegmentation/src/caffe-switch/caffe/python')
-import caffe
 import torch
 import resnet_dilated_frozen_r5_D #TODO
 import resnet_dilated_frozen_r5_D #TODO
