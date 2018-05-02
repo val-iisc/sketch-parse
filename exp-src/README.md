@@ -1,7 +1,7 @@
 This folder contains code to replicate results corresponding to `B, BC, BCP` in Table 1 and `B-R5, BC-R5, BCP-R5` in Table 3 in the paper. 
 
 ### Instructions for use
-* We fine tune our CNN using [this model(download this before running train script)](https://1drv.ms/u/s!AvBNaER10ndvhb1Dfh8jsRmilv718w). [Deeplab v2 authors](https://arxiv.org/abs/1606.00915) released a pretrained version of their net on MSCOCO. We converted it to a pytorch .pth file and use it to fine train our model. Please download this file and place it in the same folder as the train script.
+* Please download the contents of [this folder](https://1drv.ms/f/s!AvBNaER10ndvhb1A-_v0Zt4SEeYv5A) first. [Deeplab v2 authors](https://arxiv.org/abs/1606.00915) released a pretrained version of their net on MSCOCO. We converted it to a pytorch .pth file and use it to fine train our model. The downloaded folder contains the file `MS_DeepLab_resnet_pretained_VOC.pth` which corresponds to this .pth file. Please keep this .pth file in the same folder as the train script. The folder also contains `train_sketches.zip` and `train_sketch_GT.zip` which contains the augmented data (sketches and the corresponding ground truth respectively) used to train our model. 
 
 * Use `train_r5.py` to train model for results `B-R5, BC-R5, BCP-R5` in Table 3.
 
