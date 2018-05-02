@@ -67,7 +67,7 @@ counter = 0
 model.cuda(gpu0)
 snapPrefix= args['--snapPrefix']
 for iter in range(1,20):
-    saved_state_dict = torch.load('snapshots/'+snapPrefix+str(iter)+'000.pth')
+    saved_state_dict = torch.load('data/snapshots/'+snapPrefix+str(iter)+'000.pth')
     if counter==0:
 	print snapPrefix
     counter+=1
