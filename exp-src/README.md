@@ -25,7 +25,7 @@ To get a description for each flag used, run
 python train_r5.py -h
 ```
 
-To evaluate models trained with train_r5.py, run eval_r5.py with the required snapPrefix, testGTpath(test ground truth) and testIMpath(test images) arguments. Links to download the test data is available in [this readme](https://github.com/val-iisc/sketch-parse/tree/master/exp-src/data/sketch-dataset).
+* To evaluate models trained with `train_r5.py`, run `eval_r5.py` with the required snapPrefix, testGTpath(test ground truth) and testIMpath(test images) arguments. Links to download the test data is available in [this readme](https://github.com/val-iisc/sketch-parse/tree/master/exp-src/data/sketch-dataset).
 
 
 * Use `train_r1.py`  to train model for results `B, BC, BCP` in Table 1.
@@ -39,7 +39,7 @@ To get a description for each flag used, run
 ```
 python train_r1.py -h
 ```
-To evaluate models trained using train_r1.py, run eval_r1.py with the required snapPrefix, testGTpath(test ground truth) and testIMpath(test images) arguments. Links to download the test data is available in [this readme](https://github.com/val-iisc/sketch-parse/tree/master/exp-src/data/sketch-dataset)
+* To evaluate models trained using `train_r1.py`, run `eval_r1.py` with the required snapPrefix, testGTpath(test ground truth) and testIMpath(test images) arguments. Links to download the test data is available in [this readme](https://github.com/val-iisc/sketch-parse/tree/master/exp-src/data/sketch-dataset)
 
 * Run `table1.py`, `table3.py` to evaluate the downloaded  `.pth` files and get results corresponding to table 1 and table 3 in the paper.
 
