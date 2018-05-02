@@ -26,7 +26,7 @@ We have a multi-task deep neural network that can segment freehand sketches as w
 
 # Requirements
 
-This code was developed and tested on an Ubuntu 14.04 machine with pyTorch (v0.1.12). We used an NVIDIA TITAN X for training and evaluating our model.
+This code was developed and tested on an Ubuntu 14.04 machine with python 2.7 and pyTorch (v0.1.12). We used an NVIDIA TITAN X for training and evaluating our model.
 
 #### If you use this work, please cite the paper:
 
