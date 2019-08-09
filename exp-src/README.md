@@ -41,9 +41,7 @@ python train_r1.py -h
 ```
 * To evaluate models trained using `train_r1.py`, run `eval_r1.py` with the required snapPrefix, testGTpath(test ground truth) and testIMpath(test images) arguments. Links to download the test data is available in [this readme](https://github.com/val-iisc/sketch-parse/tree/master/exp-src/data/sketch-dataset)
 
-* Run `table1.py`, `table3.py` to evaluate the downloaded  `.pth` files and get results corresponding to table 1 and table 3 in the paper.
+* Run `table1.py`, `table3.py` to evaluate the downloaded  `.pth` files and get results corresponding to table 1 and table 3 in the paper. Download pretrained models from [here](http://val.serc.iisc.ernet.in/star_snapshots/) and place them in the folder `data/snapshots`. Download the annotated sketches(using instructions in [this readme](https://github.com/val-iisc/sketch-parse/tree/master/exp-src/data/sketch-dataset)) and place them in 'data/sketch-dataset'. After this, `table1.py` and `table3.py` should run properly.
 
-Place the downloaded files in the folder `data/snapshots` and place the downloaded annotated sketches in then run `table1.py` and `table3.py`.
-The .pth files can be downloaded from [here](http://val.serc.iisc.ernet.in/star_snapshots/).
 
 `pred_gt.txt` contains the predicted label and the real label of each sketch image. The predicted label can also be found real time using a trained classifier. The architecture of the classifier is mentioned in the supplementary material and the training policy / data is mentioned in the paper. This file is used during evaluation.
