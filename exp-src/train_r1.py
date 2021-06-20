@@ -53,7 +53,7 @@ if not args['--segnetLoss']:
 if args['--snapPrefix'] != 'NoFile':
     snapPrefix = args['--snapPrefix'] 
 
-print snapPrefix
+print (snapPrefix)
 
 
 def find_med_frequency(img_list,max_):
@@ -83,7 +83,7 @@ def read_file(path_to_file):
     return img_list
 
 def chunker(seq, size):
-    return (seq[pos:pos+size] for pos in xrange(0,len(seq), size))
+    return (seq[pos:pos+size] for pos in range(0,len(seq), size))
 
 def resize_label_batch(label, size):
     label_resized = np.zeros((size,size,1,label.shape[3]))
@@ -109,12 +109,12 @@ with open('data/lists/Pose_all_label.txt', 'r') as f:
     for line in f:
         line = line.strip()
         imId, pose= line.split(' ')
-	if imId[0] == '2': 
-	    year, imId, crop = imId.split('_')
+        if imId[0] == '2': 
+            year, imId, crop = imId.split('_')
             imId = os.path.splitext(year+'_'+imId+'-'+crop)[0]
-	else:
-	    imId = os.path.splitext(imId)[0]
-	HCpose[imId] = int(pose)
+        else:
+            imId = os.path.splitext(imId)[0]
+        HCpose[imId] = int(pose)
 
 
 def get_data_from_chunk_v2(chunk):
@@ -124,14 +124,14 @@ def get_data_from_chunk_v2(chunk):
     gt = np.zeros((321,321,1,len(chunk)))
     poses = np.zeros((1, len(chunk)))
     for i, piece in enumerate(chunk):
-	images[:,:,:,i] = cv2.imread(img_path+piece+'.png')
-	imId, aug = piece.split('(')
-	pose = int(HCpose[imId])
-	# Account for flip augmentations
-	if 'm' in aug: # ugly hack because poses are 0-7 in vivek's list
-	    pose = mirrorMap[pose+1]
-	    pose -=1
-	poses[:,i] = pose
+        images[:,:,:,i] = cv2.imread(img_path+piece+'.png')
+        imId, aug = piece.split('(')
+        pose = int(HCpose[imId])
+        # Account for flip augmentations
+        if 'm' in aug: # ugly hack because poses are 0-7 in vivek's list
+            pose = mirrorMap[pose+1]
+            pose -=1
+        poses[:,i] = pose
         gt[:,:,0,i] = cv2.imread(gt_path+piece+'.png')[:,:,0]
 
     labels = [resize_label_batch(gt,i) for i in [41,41,21,41]]
@@ -224,7 +224,7 @@ for i in old_model_dict:
     if (i in old_model_dict.keys()) and (i not in saved_state_dict.keys()):
         saved_state_dict[i] = old_model_dict[i]
 
-model.load_state_dict(saved_state_dict)
+model.load_state_dict(saved_state_dict,strict = False)
 
 ## Training hyper params
 
@@ -255,15 +255,15 @@ optimizer.zero_grad()
 data_gen = chunker(data_list, batch_size)
 
 for iter in range(maxIter+1):
-    chunk = data_gen.next()
+    chunk = data_gen.__next__()
     images, label, pose = get_data_from_chunk_v2(chunk)
 
     images = Variable(images).cuda(gpu0)
 
     out = model(images)
-	
+        
     loss = loss_calc_seg(out[0], label[0], gpu0, seg_weights)
-	
+        
     for i in range(len(out)-2):
         loss = loss + loss_calc_seg(out[i+1],label[i+1],gpu0, seg_weights)
     loss = loss + lambda1*loss_calc_pose(out[-1], pose[0], gpu0)
@@ -271,18 +271,18 @@ for iter in range(maxIter+1):
     (loss/iterSize).backward()
 
     if iter %1 == 0:
-        print 'iter = ',iter, 'of',maxIter,'completed, loss = ', loss.data
+        print ('iter = ',iter, 'of',maxIter,'completed, loss = ', loss.data)
 
     if iter %iterSize  == 0:
         optimizer.step()
         lr_ = lr_poly(base_lr,iter,maxIter,0.9)
-        print '(poly lr policy) learning rate',lr_
+        print ('(poly lr policy) learning rate',lr_)
         optimizer = optim.SGD([{'params': get_1x_lr_params_NOscale(model), 'lr': lr_ }, {'params': get_10x_lr_params(model), 'lr': 10*lr_} ], lr = lr_, momentum = 0.9)
         optimizer.zero_grad()
 
 
     if iter % 1000 == 0 and iter !=0:
-        print 'taking snapshot ...'
+        print ('taking snapshot ...')
         snapPath = 'data/snapshots/DeepLab_RN_auxPose_' + snapPrefix +str(iter)+'.pth'
         torch.save(model.state_dict(), snapPath)
 

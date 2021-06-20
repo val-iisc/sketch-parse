@@ -3,3 +3,4 @@ data/snapshots/*
 *.pyc
 data/im/*
 data/gt/*
+*.pth

@@ -36,7 +36,7 @@ Options:
 
 
 args = docopt(docstr, version='v0.1')
-print args
+print (args)
 cudnn.enabled = False
 gpu0 = int(args['--gpu0'])
 
@@ -51,7 +51,7 @@ if not args['--segnetLoss']:
 if args['--snapPrefix'] != 'NoFile':
     snapPrefix = args['--snapPrefix'] 
 
-print snapPrefix
+print (snapPrefix)
 
 cudnn.enabled = False
 
@@ -74,12 +74,12 @@ with open('data/lists/Pose_all_label.txt', 'r') as f:
     for line in f:
         line = line.strip()
         imId, pose= line.split(' ')
-	if imId[0] == '2': 
-	    year, imId, crop = imId.split('_')
+        if imId[0] == '2': 
+            year, imId, crop = imId.split('_')
             imId = os.path.splitext(year+'_'+imId+'-'+crop)[0]
-	else:
-	    imId = os.path.splitext(imId)[0]
-	HCpose[imId] = int(pose)
+        else:
+            imId = os.path.splitext(imId)[0]
+        HCpose[imId] = int(pose)
 
 
 def get_data_from_chunk(chunk):
@@ -91,13 +91,13 @@ def get_data_from_chunk(chunk):
     for i,piece in enumerate(chunk):
         images[:,:,:,i] = cv2.imread(img_path+piece+'.png')
         gt[:,:,0,i] = cv2.imread(gt_path+piece+'.png')[:,:,0]
-	imId, aug = piece.split('(')
-	pose = int(HCpose[imId])
+        imId, aug = piece.split('(')
+        pose = int(HCpose[imId])
 	# Account for flip augmentations
-	if 'm' in aug: # ugly hack because poses are 0-7 in vivek's list
-	    pose = mirrorMap[pose+1]
-	    pose -=1
-	poses[:,i] = pose
+        if 'm' in aug: # ugly hack because poses are 0-7 in vivek's list
+            pose = mirrorMap[pose+1]
+            pose -=1
+        poses[:,i] = pose
 
     labels = [resize_label_batch(gt,i) for i in [41,41,21,41]]
 #   image shape H,W,3,batch -> batch,3,H,W
@@ -112,7 +112,7 @@ def find_med_frequency(img_list,max_):
     gt_path = args['--GTpath']
     dict_store = {}
     for i in range(max_):
-	dict_store[i] = []
+        dict_store[i] = []
     for i,piece in enumerate(img_list):
         gt = cv2.imread(gt_path+piece+'.png')[:,:,0]
         for i in range(max_):
@@ -140,7 +140,7 @@ def read_file(path_to_file,i):
     return img_list
 
 def chunker(seq, size):
-    return (seq[pos:pos+size] for pos in xrange(0,len(seq), size))
+    return (seq[pos:pos+size] for pos in range(0,len(seq), size))
 
 def resize_label_batch(label, size):
     label_resized = np.zeros((size,size,1,label.shape[3]))
@@ -296,29 +296,16 @@ old_dict = model_double.state_dict()
 ############  net surgery for the model with 5 branches
 for i in old_dict.keys():   
     if i in saved_state_dict:                   # for the common branches
-	    old_dict[i] = saved_state_dict[i]
-	    #print i
+        old_dict[i] = saved_state_dict[i]
+	#print i
     else:                                       # for specialist branches for each supercategory
-	    i_split = i.split('.')
-	    if i_split[1][:-1] == 'layer4_5_r': 
-		i_split_copy = i_split
-		i_split_copy[1] = i_split_copy[1][:-5]
-		i_split_copy[2] = str(int(i_split_copy[2])+2)
-		old_dict[i] = saved_state_dict['.'.join(i_split_copy)]
-
-	    if (i_split[1][:] == 'layer5_r0' or i_split[1][:] == 'layer5_r1' or  i_split[1][:] == 'layer5_r3') and i_split[:-1]=='weight':
-	        i_split_copy = i_split
-	        i_split_copy[1] = i_split_copy[1][:-3]
-	        #old_dict[i] = saved_dict_temp['.'.join(i_split_copy)]   #TODO
-            #print i, '.'.join(i_split_copy)
-	    if i_split[1][:] == 'layer5_r2' and  i_split[:-1]=='weight':  #7
-	        i_split_copy = i_split
-	        i_split_copy[1] = i_split_copy[1][:-3]
-	        #old_dict[i] = torch.from_numpy(np.load('7.npy'))        #TODO
-	    if i_split[1][:] == 'layer5_r4' and  i_split[:-1]=='weight': #9
-	        i_split_copy = i_split
-	        i_split_copy[1] = i_split_copy[1][:-3]
-	        #old_dict[i] = torch.from_numpy(np.load('9.npy'))       #TODO
+        i_split = i.split('.')
+        if i_split[1][:-1] == 'layer4_5_r': 
+            i_split_copy = i_split
+            i_split_copy[1] = i_split_copy[1][:-5]
+            i_split_copy[2] = str(int(i_split_copy[2])+2)
+            if 'num_batches_tracked' not in i:
+                old_dict[i] = saved_state_dict['.'.join(i_split_copy)]
 
 model_double.load_state_dict(copy.deepcopy(old_dict))
 #############
@@ -357,7 +344,7 @@ optimizer_double.zero_grad()
 data_gen = chunker(data_list, batch_size)
 
 for iter in range(maxIter+1):
-    chunk = data_gen.next()
+    chunk = data_gen.__next__()
     images, label, pose = get_data_from_chunk([chunk[0][0]])
     selector = chunk[0][1]
     images_1 = Variable(images).cuda(gpu0)
@@ -369,22 +356,22 @@ for iter in range(maxIter+1):
     for i in range(len(out_double)-2):  # do not iterate over pose output (last element in output list)
         loss_double = loss_double + loss_calc_seg(out_double[i+1],label[i+1],gpu0,seg_weights[selector])
     logseg = loss_double.data.cpu().numpy()
-    print iter, 'loss (Seg) = ', logseg
+    print (iter, 'loss (Seg) = ', logseg)
 
     loss_double = loss_double + lambda1*loss_calc_pose(out_double[-1], pose[0], gpu0)
-    print iter, 'loss (Pose) = ', loss_double.data.cpu().numpy() - logseg 
+    print (iter, 'loss (Pose) = ', loss_double.data.cpu().numpy() - logseg)
 
 
     (loss_double/iterSize).backward()
 
 
     lr_ = lr_poly(base_lr,iter,maxIter,0.9)
-    print '(poly lr policy) learning rate',lr_
+    print ('(poly lr policy) learning rate',lr_)
     optimizer_double = optim.SGD([{'params': get_1x_lr_params_NObn_double(model_double), 'lr': lr_ }, {'params': get_10x_lr_params_double(model_double), 'lr': 10*lr_},{'params': get_50x_lr_params_double(model_double), 'lr': 50*lr_}  ], lr = lr_, momentum = 0.9)
 
     if iter%iterSize==0:
-	optimizer_double.step()
-	optimizer_double.zero_grad()
+        optimizer_double.step()
+        optimizer_double.zero_grad()
     
     if iter%1000==0 and iter!=0:
         snapPath = os.path.join('data/snapshots', snapPrefix + str(iter) + '.pth')

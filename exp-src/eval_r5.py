@@ -29,7 +29,7 @@ Options:
     --gpu0=<int>                GPU number [default: 0]
 """
 args = docopt(docstr, version='v0.1')
-print args
+print (args)
 
 
 def get_iou(pred,gt,class_):
@@ -60,8 +60,8 @@ def get_iou(pred,gt,class_):
 
 def merge_parts(map_, i):
     if i == 4:
-	map_ = change_parts(map_,7,2)
-	map_ = change_parts(map_,8,5)
+        map_ = change_parts(map_,7,2)
+        map_ = change_parts(map_,8,5)
     return map_
 def change_parts(map_,a,b):
     temp = np.where(map_==a)
@@ -77,10 +77,10 @@ model.eval()
 counter = 0
 model.cuda()
 snapPrefix= args['--snapPrefix']
-for iter in range(1,21):
+for iter in range(1,21):#range(1,21):
     saved_state_dict = torch.load('data/snapshots/'+snapPrefix+str(iter)+'000.pth')
     if counter==0:
-	print snapPrefix
+        print (snapPrefix)
     counter+=1
     model.load_state_dict(saved_state_dict)
 
@@ -89,12 +89,12 @@ for iter in range(1,21):
     pytorch_list = [];
     class_ious = []
     for class_selector in class_list:
-	pytorch_per_class = []
-	class_split = class_selector.split('-')
-	class_ = class_split[0]
- 	selector = int(class_split[1])
+        pytorch_per_class = []
+        class_split = class_selector.split('-')
+        class_ = class_split[0]
+        selector = int(class_split[1])
         gt_path = args['--testGTpath']+class_
-        img_list = next(os.walk(gt_path))[2] 
+        img_list = os.walk(gt_path).__next__()[2] 
         path = sketch_root + class_
         for i in img_list:
             img = cv2.imread(path+'/'+i)
@@ -103,8 +103,9 @@ for iter in range(1,21):
             img = ndimage.grey_erosion(img[:,:,0].astype(np.uint8), size=(2,2))
             img = np.repeat(img[:,:,np.newaxis],3,2)
             gt = cv2.imread(gt_path+'/'+i, 0)
-            output = model([Variable(torch.from_numpy(img[np.newaxis, :].transpose(0,3,1,2)).float(),volatile=True).cuda(),selector])
-	    interp = nn.UpsamplingBilinear2d(size=(321, 321))
+            with torch.no_grad():
+                output = model([Variable(torch.from_numpy(img[np.newaxis, :].transpose(0,3,1,2)).float(),volatile=True).cuda(),selector])
+            interp = nn.UpsamplingBilinear2d(size=(321, 321))
             if args['--visualize']:
                 output_temp = output[3].cpu().data[0].numpy()
                 output_temp = output_temp.transpose(1,2,0)
@@ -116,14 +117,15 @@ for iter in range(1,21):
                 plt.subplot(1,3,3)
                 plt.imshow(output_temp)
                 plt.show()
-	    output = interp(output[3])
+            with torch.no_grad():
+                output = interp(output[3])
             output = output.cpu().data[0].numpy()
             output = output.transpose(1,2,0)
             output = np.argmax(output,axis = 2)
-	    output = merge_parts(output, selector)
-	    gt = merge_parts(gt, selector)
+            output = merge_parts(output, selector)
+            gt = merge_parts(gt, selector)
             iou_pytorch = get_iou(output,gt,class_)
             pytorch_list.append(iou_pytorch)
-	    pytorch_per_class.append(iou_pytorch)
-    	class_ious.append(np.sum(np.asarray(pytorch_per_class))/len(pytorch_per_class))
-    print 'pytorch',iter, np.sum(np.asarray(pytorch_list))/len(pytorch_list),'per class', class_ious
+            pytorch_per_class.append(iou_pytorch)
+        class_ious.append(np.sum(np.asarray(pytorch_per_class))/len(pytorch_per_class))
+    print ('pytorch',iter, np.sum(np.asarray(pytorch_list))/len(pytorch_list),'per class', class_ious)

@@ -30,7 +30,7 @@ Options:
 """
 
 args = docopt(docstr, version='v0.1')
-print args
+print (args)
 
 def get_iou(pred,gt):
     assert(pred.shape == gt.shape)    
@@ -69,7 +69,7 @@ snapPrefix= args['--snapPrefix']
 for iter in range(1,20):
     saved_state_dict = torch.load('data/snapshots/'+snapPrefix+str(iter)+'000.pth')
     if counter==0:
-	print snapPrefix
+        print (snapPrefix)
     counter+=1
     model.load_state_dict(saved_state_dict)
 
@@ -87,7 +87,8 @@ for iter in range(1,20):
             img = ndimage.grey_erosion(img[:,:,0].astype(np.uint8), size=(2,2))
             img = np.repeat(img[:,:,np.newaxis],3,2)
             gt = cv2.imread(gt_path+'/'+i, 0)
-            output = model(Variable(torch.from_numpy(img[np.newaxis, :].transpose(0,3,1,2)).float(), volatile=True).cuda(gpu0))
+            torch.no_grad():
+                output = model(Variable(torch.from_numpy(img[np.newaxis, :].transpose(0,3,1,2)).float(), volatile=True).cuda(gpu0))
             interp = nn.UpsamplingBilinear2d(size=(321, 321))
 
             if args['--visualize']:
@@ -101,8 +102,8 @@ for iter in range(1,20):
                 plt.subplot(1,3,3)
                 plt.imshow(output_temp)
                 plt.show()
-               
-            output = interp(output[3]).cpu().data[0].numpy()
+            torch.no_grad():   
+                output = interp(output[3]).cpu().data[0].numpy()
             output = output.transpose(1,2,0)
             output = np.argmax(output,axis = 2)
             iou_pytorch = get_iou(output,gt)       
@@ -110,4 +111,4 @@ for iter in range(1,20):
             cv2.imwrite('test/gt.png',gt)
             pytorch_list.append(iou_pytorch)
 
-    print 'pytorch',iter, np.sum(np.asarray(pytorch_list))/len(pytorch_list)
+    print ('pytorch',iter, np.sum(np.asarray(pytorch_list))/len(pytorch_list))
