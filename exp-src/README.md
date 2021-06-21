@@ -1,3 +1,8 @@
+____
+## NEW (June 2021)
+This branch has code for Pytorch 0.4 and Python 2. Please use the code in [this branch](https://github.com/val-iisc/sketch-parse/tree/Python3/exp-src) titled Python3 of this repository for code that works with Python 3 and Pytorch 1.4.0
+____
+
 This folder contains code to replicate results corresponding to `B, BC, BCP` in Table 1 and `B-R5, BC-R5, BCP-R5` in Table 3 in the paper. 
 
 ### Instructions for use
