@@ -1,7 +1,10 @@
-# NEW UPDATES
-Code has been updated to work with Python 3 and a more recent version of Pytorch. I tested code on Python 3.7 with Pytorch version 1.4.0.
-Please also install doctopt and opencv before running training / inferences. 
-Download checkpoints for `BCP-R5` and `BCP` from [this folder](https://drive.google.com/drive/folders/1SrwpR8vrqOgEsOPQLlsWcaWPr357ADeN?usp=sharing). These checkpoints can be evaluated using `eval_r5.py` and `eval_r1.py` respectively. The old checkpoint link mentioned below no longer works.
+___
+### NEW UPDATES (June 2021)
+* Code has been updated to work with Python 3 and a more recent version of Pytorch. I tested code on Python 3.7 with Pytorch version 1.4.0.
+* Please also install numpy, docopt,scipy and matplotlib and opencv before running training / inferences. 
+* Download checkpoints for `BCP-R5` and `BCP` from [this folder](https://drive.google.com/drive/folders/1SrwpR8vrqOgEsOPQLlsWcaWPr357ADeN?usp=sharing). These checkpoints can be evaluated using `eval_r5.py` and `eval_r1.py` respectively. The old checkpoint link mentioned below no longer works.
+___
+
 
 This folder contains code to replicate results corresponding to `B, BC, BCP` in Table 1 and `B-R5, BC-R5, BCP-R5` in Table 3 in the paper. 
 
