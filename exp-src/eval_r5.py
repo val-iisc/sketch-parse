@@ -104,7 +104,7 @@ for iter in range(1,21):#range(1,21):
             img = np.repeat(img[:,:,np.newaxis],3,2)
             gt = cv2.imread(gt_path+'/'+i, 0)
             with torch.no_grad():
-                output = model([Variable(torch.from_numpy(img[np.newaxis, :].transpose(0,3,1,2)).float(),volatile=True).cuda(),selector])
+                output = model([Variable(torch.from_numpy(img[np.newaxis, :].transpose(0,3,1,2)).float()).cuda(),selector])
             interp = nn.UpsamplingBilinear2d(size=(321, 321))
             if args['--visualize']:
                 output_temp = output[3].cpu().data[0].numpy()

@@ -286,4 +286,4 @@ for iter in range(maxIter+1):
         snapPath = 'data/snapshots/DeepLab_RN_auxPose_' + snapPrefix +str(iter)+'.pth'
         torch.save(model.state_dict(), snapPath)
 
-subP.call(['python eval_r1.py', '--snapPrefix', 'DeepLab_RN_auxPose_' + snapPrefix ])
+#subP.call(['python eval_r1.py', '--snapPrefix', 'DeepLab_RN_auxPose_' + snapPrefix ])

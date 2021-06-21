@@ -87,8 +87,8 @@ for iter in range(1,20):
             img = ndimage.grey_erosion(img[:,:,0].astype(np.uint8), size=(2,2))
             img = np.repeat(img[:,:,np.newaxis],3,2)
             gt = cv2.imread(gt_path+'/'+i, 0)
-            torch.no_grad():
-                output = model(Variable(torch.from_numpy(img[np.newaxis, :].transpose(0,3,1,2)).float(), volatile=True).cuda(gpu0))
+            with torch.no_grad():
+                output = model(Variable(torch.from_numpy(img[np.newaxis, :].transpose(0,3,1,2)).float()).cuda(gpu0))
             interp = nn.UpsamplingBilinear2d(size=(321, 321))
 
             if args['--visualize']:
@@ -102,7 +102,7 @@ for iter in range(1,20):
                 plt.subplot(1,3,3)
                 plt.imshow(output_temp)
                 plt.show()
-            torch.no_grad():   
+            with torch.no_grad():   
                 output = interp(output[3]).cpu().data[0].numpy()
             output = output.transpose(1,2,0)
             output = np.argmax(output,axis = 2)
