@@ -54,7 +54,7 @@ pytz==2016.6.1
 pyzmq==15.4.0
 qtconsole==4.2.1
 randomcolor==0.4.4.3
-requests==2.11.1
+requests==2.20.0
 requests-oauthlib==0.7.0
 simplegeneric==0.8.1
 singledispatch==3.4.0.3
