@@ -11,7 +11,7 @@ decorator==4.0.10
 docutils==0.12
 entrypoints==0.2.2
 enum34==1.1.6
-Flask==0.11.1
+Flask==1.0
 Flask-Admin==1.5.3
 Flask-Dance==0.10.0
 Flask-DebugToolbar==0.10.0
